@@ -5,5 +5,12 @@ import (
 )
 
 func CreateStockHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 Method not found."))
+		return
+	}
+
+	w.WriteHeader(200)
 	w.Write([]byte("create stock"))
 }
