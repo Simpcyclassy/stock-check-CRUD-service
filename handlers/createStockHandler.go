@@ -6,7 +6,7 @@ import (
 
 func CreateStockHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		w.WriteHeader(http.StatusNotFound)
+		w.WriteHeader(http.StatusMethodNotAllowed)
 		w.Write([]byte("404 Method not found."))
 		return
 	}

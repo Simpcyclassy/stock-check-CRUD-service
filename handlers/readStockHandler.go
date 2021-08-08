@@ -6,7 +6,7 @@ import (
 
 func ReadStockHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
-		w.WriteHeader(http.StatusNotFound)
+		w.WriteHeader(http.StatusMethodNotAllowed)
 		w.Write([]byte("404 Method not found."))
 		return
 	}
