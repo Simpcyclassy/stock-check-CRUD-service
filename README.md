@@ -21,7 +21,7 @@ Create the database locally:
 
 ```sh
 make db
-# you may also need to run make dev the first time
+# you may also need to run `make docker-build` the first time
 ```
 
 You can inspect the database by connecting manually using the [psql tool](https://www.postgresql.org/docs/9.2/app-psql.html), [installation instructions](https://blog.timescale.com/tutorials/how-to-install-psql-on-mac-ubuntu-debian-windows/). Use `psql -U postgres -h localhost` to connect (after the database is running locally), then enter the local-dev password (which is dev). Inside psql, the command `\dt` will show you a list of tables, and `\d <table_name>` will describe a table.
