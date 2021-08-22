@@ -4,7 +4,7 @@ DB_CONTAINER_NAME=postgres-$(DOCKER_TAG)
 DB_IMAGE=postgres:10-alpine
 DOCKER_BUILD_CONTEXT=./
 
-db: clean start-db migrate
+db: docker-build clean start-db migrate
 
 start-db:
 	docker run --rm -d \
@@ -32,7 +32,7 @@ ifneq "$(SQL_MIGRATE)" "sql-migrate"
 	@echo -e "=> Or, install github.com/rubenv/sql-migrate to make these migrations run faster locally.\n\n"
 endif
 
-	$(SQL_MIGRATE) up -config=./database/migrations/user.dbconfig.yml --env localtest
+	$(SQL_MIGRATE) up -config=./database/migrations/user.dbconfig.yml --env local
 
 docker-build:
 	docker build \
