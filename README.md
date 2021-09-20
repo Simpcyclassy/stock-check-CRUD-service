@@ -35,14 +35,14 @@ make db
 If the port is already allocated you will need to run:
 
 ```sh
-lsof -i :5432
-# to find out what is running at the port 5432, then
+lsof -i :5430
+# to find out what is running at the port 5430, then
 kill <pid-number>
-# to kill the running process blocking port 5432
+# to kill the running process blocking port 5430
 # sometimes you may have to do this `sudo`
 ```
 
-You can inspect the database by connecting manually using the [psql tool](https://www.postgresql.org/docs/9.2/app-psql.html), [installation instructions](https://blog.timescale.com/tutorials/how-to-install-psql-on-mac-ubuntu-debian-windows/). Use `psql -U postgres -h localhost` to connect (after the database is running locally), then enter the local-dev password (which is dev). Inside psql, the command `\dt` will show you a list of tables, and `\d <table_name>` will describe a table.
+You can inspect the database by connecting manually using the [psql tool](https://www.postgresql.org/docs/9.2/app-psql.html), [installation instructions](https://blog.timescale.com/tutorials/how-to-install-psql-on-mac-ubuntu-debian-windows/). Use `psql -U postgres -h localhost -p 5430` to connect (after the database is running locally), then enter the local-dev password (which is dev). Inside psql, the command `\dt` will show you a list of tables, and `\d <table_name>` will describe a table.
 
 Example:
 

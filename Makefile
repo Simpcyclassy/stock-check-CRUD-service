@@ -4,20 +4,20 @@ DB_CONTAINER_NAME=postgres-$(DOCKER_TAG)
 DB_IMAGE=postgres:10-alpine
 DOCKER_BUILD_CONTEXT=./
 
-db: docker-build clean start-db migrate
+db: clean start-db migrate
 
 start-db:
 	docker run --rm -d \
 		--name=$(DB_CONTAINER_NAME) \
 		-e POSTGRES_PASSWORD=dev \
-		-p 5432:5432 \
+		-p 5430:5432 \
 		$(DB_IMAGE)
 
 	# Wait for postgres server to start & be ready (accept incoming connections)
 	while ! docker exec $(DB_CONTAINER_NAME) pg_isready -h localhost -d postgres -U postgres; do sleep 2; done
 
 ifeq "" "$(shell command -v sql-migrate 2> /dev/null)"
-SQL_MIGRATE=docker run --rm --net=container:$(DB_CONTAINER_NAME) $(DOCKER_NAME):$(DOCKER_TAG) sql-migrate
+SQL_MIGRATE=docker run --rm --net=container:$(DB_CONTAINER_NAME) $(DOCKER_NAME) sql-migrate
 else
 SQL_MIGRATE=sql-migrate
 endif
@@ -37,7 +37,7 @@ endif
 docker-build:
 	docker build \
 		-f $(DOCKER_BUILD_CONTEXT)/Dockerfile \
-		-t $(DOCKER_NAME):$(DOCKER_TAG) \
+		-t $(DOCKER_NAME) \
 		$(DOCKER_BUILD_CONTEXT)
 
 clean:

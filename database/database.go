@@ -2,7 +2,7 @@
 // connect to the database
 // retrieve the first row in the database
 // log the retrieved data
-package database
+package main
 
 import (
 	"database/sql"
@@ -14,7 +14,7 @@ import (
 
 const (
 	host     = "localhost"
-	port     = 5432
+	port     = 5430
 	user     = "postgres"
 	password = "dev"
 	dbname   = "postgres"
@@ -35,6 +35,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	// Insert new row
+	sqlStatement := `
+  INSERT INTO stock (id, amount_available, amount_sold, description, location, name, price)
+  VALUES ('1251b2c9-6779-4246-b8ab-beb7057d3bc1', 100, 15, 'Xps 13 9310', 'Nigeria', 'Laptop', 1800.0)`
+	value, err := db.Exec(sqlStatement)
+	log.Info().Msgf("Inserted %d row(s)", value)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println("Successfully connected!")
 }
